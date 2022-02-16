@@ -108,6 +108,24 @@ services:
       - BACKUP_KEEP_MONTHS=6
       - HEALTHCHECK_PORT=8080
     restart: unless-stopped
+  payment-backup:
+    image: prodrigestivill/postgres-backup-local
+    volumes:
+      - $DATA/payment-backup:/backups
+    networks:
+      - default
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST:-postgres-payment}
+      - POSTGRES_DB=opex_payment
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
+      - SCHEDULE=* * * * *
+      - BACKUP_KEEP_DAYS=7
+      - BACKUP_KEEP_WEEKS=4
+      - BACKUP_KEEP_MONTHS=6
+      - HEALTHCHECK_PORT=8080
+    restart: unless-stopped
 networks:
   default:
     name: ${DEFAULT_NETWORK_NAME:-opex}

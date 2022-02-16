@@ -4,14 +4,14 @@ pipeline {
     stages('Deploy') {
         stage('Deliver') {
             environment {
-                DATA = '/var/opex/demo-backup'
+                DATA = '/var/opex/dev-backup'
                 DB_USER = 'opex'
-                DB_PASS = credentials("db-secret")
+                DB_PASS = credentials("db-secret-dev")
                 COMPOSE_PROJECT_NAME = 'dev-backup'
                 DEFAULT_NETWORK_NAME = 'dev-opex'
             }
             steps {
-                sh 'docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build --remove-orphans'
+                sh 'docker-compose up -d --build --remove-orphans'
                 sh 'docker image prune -f'
                 sh 'docker network prune -f'
             }

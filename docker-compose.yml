@@ -1,0 +1,132 @@
+version: '3.8'
+services:
+  accountant-backup:
+    image: prodrigestivill/postgres-backup-local
+    volumes:
+      - $DATA/accountatn-backup:/backups
+    networks:
+      - default
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST:-postgres-accountant}
+      - POSTGRES_DB=opex_accountant
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
+      - SCHEDULE=*/30 * * * *
+      - BACKUP_KEEP_DAYS=7
+      - BACKUP_KEEP_WEEKS=4
+      - BACKUP_KEEP_MONTHS=6
+      - HEALTHCHECK_PORT=8080
+    restart: unless-stopped
+  auth-backup:
+    image: prodrigestivill/postgres-backup-local
+    volumes:
+      - $DATA/auth-backup:/backups
+    networks:
+      - default
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST:-postgres-auth}
+      - POSTGRES_DB=opex_auth
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
+      - SCHEDULE=*/30 * * * *
+      - BACKUP_KEEP_DAYS=7
+      - BACKUP_KEEP_WEEKS=4
+      - BACKUP_KEEP_MONTHS=6
+      - HEALTHCHECK_PORT=8080
+    restart: unless-stopped
+  wallet-backup:
+    image: prodrigestivill/postgres-backup-local
+    volumes:
+      - $DATA/wallet-backup:/backups
+    networks:
+      - default
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST:-postgres-wallet}
+      - POSTGRES_DB=opex_wallet
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
+      - SCHEDULE=*/30 * * * *
+      - BACKUP_KEEP_DAYS=7
+      - BACKUP_KEEP_WEEKS=4
+      - BACKUP_KEEP_MONTHS=6
+      - HEALTHCHECK_PORT=8080
+    restart: unless-stopped
+  eventlog-backup:
+    image: prodrigestivill/postgres-backup-local
+    volumes:
+      - $DATA/eventlog-backup:/backups
+    networks:
+      - default
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST:-postgres-eventlog}
+      - POSTGRES_DB=opex_eventlog
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
+      - SCHEDULE=*/30 * * * *
+      - BACKUP_KEEP_DAYS=7
+      - BACKUP_KEEP_WEEKS=4
+      - BACKUP_KEEP_MONTHS=6
+      - HEALTHCHECK_PORT=8080
+    restart: unless-stopped
+  api-backup:
+    image: prodrigestivill/postgres-backup-local
+    volumes:
+      - $DATA/api-backup:/backups
+    networks:
+      - default
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST:-postgres-api}
+      - POSTGRES_DB=opex_api
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
+      - SCHEDULE=*/30 * * * *
+      - BACKUP_KEEP_DAYS=7
+      - BACKUP_KEEP_WEEKS=4
+      - BACKUP_KEEP_MONTHS=6
+      - HEALTHCHECK_PORT=8080
+    restart: unless-stopped
+  bc-gateway-backup:
+    image: prodrigestivill/postgres-backup-local
+    volumes:
+      - $DATA/bc-gateway-backup:/backups
+    networks:
+      - default
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST:-postgres-bc-gateway}
+      - POSTGRES_DB=opex_bc_gateway
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
+      - SCHEDULE=*/30 * * * *
+      - BACKUP_KEEP_DAYS=7
+      - BACKUP_KEEP_WEEKS=4
+      - BACKUP_KEEP_MONTHS=6
+      - HEALTHCHECK_PORT=8080
+    restart: unless-stopped
+  payment-backup:
+    image: prodrigestivill/postgres-backup-local
+    volumes:
+      - $DATA/payment-backup:/backups
+    networks:
+      - default
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST:-postgres-payment}
+      - POSTGRES_DB=opex_payment
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
+      - SCHEDULE=*/30 * * * *
+      - BACKUP_KEEP_DAYS=7
+      - BACKUP_KEEP_WEEKS=4
+      - BACKUP_KEEP_MONTHS=6
+      - HEALTHCHECK_PORT=8080
+    restart: unless-stopped
+networks:
+  default:
+    name: ${DEFAULT_NETWORK_NAME:-opex}
+    driver: bridge

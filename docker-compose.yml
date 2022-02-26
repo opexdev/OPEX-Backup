@@ -9,8 +9,8 @@ services:
     environment:
       - POSTGRES_HOST=${POSTGRES_HOST:-postgres-accountant}
       - POSTGRES_DB=opex_accountant
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_USER=${DB_BACKUP_USER}
+      - POSTGRES_PASSWORD=${DB_BACKUP_PASS}
       - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
       - SCHEDULE=*/30 * * * *
       - BACKUP_KEEP_DAYS=7
@@ -27,8 +27,8 @@ services:
     environment:
       - POSTGRES_HOST=${POSTGRES_HOST:-postgres-auth}
       - POSTGRES_DB=opex_auth
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_USER=${DB_BACKUP_USER}
+      - POSTGRES_PASSWORD=${DB_BACKUP_PASS}
       - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
       - SCHEDULE=*/30 * * * *
       - BACKUP_KEEP_DAYS=7
@@ -45,8 +45,8 @@ services:
     environment:
       - POSTGRES_HOST=${POSTGRES_HOST:-postgres-wallet}
       - POSTGRES_DB=opex_wallet
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_USER=${DB_BACKUP_USER}
+      - POSTGRES_PASSWORD=${DB_BACKUP_PASS}
       - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
       - SCHEDULE=*/30 * * * *
       - BACKUP_KEEP_DAYS=7
@@ -63,8 +63,8 @@ services:
     environment:
       - POSTGRES_HOST=${POSTGRES_HOST:-postgres-eventlog}
       - POSTGRES_DB=opex_eventlog
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_USER=${DB_BACKUP_USER}
+      - POSTGRES_PASSWORD=${DB_BACKUP_PASS}
       - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
       - SCHEDULE=*/30 * * * *
       - BACKUP_KEEP_DAYS=7
@@ -81,8 +81,8 @@ services:
     environment:
       - POSTGRES_HOST=${POSTGRES_HOST:-postgres-api}
       - POSTGRES_DB=opex_api
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_USER=${DB_BACKUP_USER}
+      - POSTGRES_PASSWORD=${DB_BACKUP_PASS}
       - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
       - SCHEDULE=*/30 * * * *
       - BACKUP_KEEP_DAYS=7
@@ -99,8 +99,8 @@ services:
     environment:
       - POSTGRES_HOST=${POSTGRES_HOST:-postgres-bc-gateway}
       - POSTGRES_DB=opex_bc_gateway
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_USER=${DB_BACKUP_USER}
+      - POSTGRES_PASSWORD=${DB_BACKUP_PASS}
       - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
       - SCHEDULE=*/30 * * * *
       - BACKUP_KEEP_DAYS=7
@@ -117,8 +117,8 @@ services:
     environment:
       - POSTGRES_HOST=${POSTGRES_HOST:-postgres-payment}
       - POSTGRES_DB=opex_payment
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_USER=${DB_BACKUP_USER}
+      - POSTGRES_PASSWORD=${DB_BACKUP_PASS}
       - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
       - SCHEDULE=*/30 * * * *
       - BACKUP_KEEP_DAYS=7

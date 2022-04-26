@@ -5,8 +5,8 @@ pipeline {
         stage('Deliver') {
             environment {
                 DATA = '/var/opex/demo-backup'
-                DB_USER = 'opex'
-                DB_PASS = credentials("db-secret")
+                DB_BACKUP_USER = 'opex_backup'
+                DB_BACKUP_PASS = credentials("db-backup-secret")
                 COMPOSE_PROJECT_NAME = 'demo-backup'
                 DEFAULT_NETWORK_NAME = 'demo-opex'
             }
